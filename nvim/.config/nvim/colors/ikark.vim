@@ -6,6 +6,7 @@ endif
 """ IKARKv2
 let g:colors_name = "ikark"
 hi Normal guifg=#a6a6a6 guibg=#0d041a ctermfg=white ctermbg=black
+"hi Delimiter guifg=#21589c
 hi link Delimiter Normal
 hi link Operator Normal
 hi LineNr guifg=#6b6b6b guibg=#0d041a
@@ -19,12 +20,11 @@ hi TabLine guifg=#a6a6a6 guibg=#28104a
 hi TabLineFill guifg=#a6a6a6 guibg=#3e1f69
 
 hi Keyword guifg=#7b0f99 gui=bold
-hi link Statement Keyword
+hi Statement guifg=#97219c gui=bold
 hi String guifg=#821e94
 hi Function guifg=#6c18ba
 hi Constant guifg=#762691
 hi Type guifg=#671ba1
-hi link Statement Keyword
 hi Identifier guifg=#762691
 hi PreProc guifg=#581463
 hi NonText guifg=#78104e
@@ -32,11 +32,7 @@ hi Comment guifg=#6b6b6b
 hi NonText guifg=#8f1460
 hi link SpecialChar NonText
 hi link Special NonText
-
-" TS
-hi TSPunctDelimiter guifg=#a6a6a6
-hi TSPunctBracket guifg=#a6a6a6
-hi TSPunctParen guifg=#a6a6a6
-hi TSPunctBrace guifg=#a6a6a6
-hi TSOperator guifg=#a6a6a6
+hi link @constructor Type
+hi @function.builtin guifg=#582c85
+hi link @constant.builtin Constant
 
