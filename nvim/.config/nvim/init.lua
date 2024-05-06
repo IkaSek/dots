@@ -29,45 +29,6 @@ local lazy = require("lazy").setup({
   "nvim-telescope/telescope.nvim"
 })
 
-local cmp = require("cmp")
-
-cmp.setup({
-	snippet = {
-		expand = function(args)
-			require("snippy").expand_snippet(args.body)
-		end
-	},
-	mapping = cmp.mapping.preset.insert({
-		['<C-b>'] = cmp.mapping.scroll_docs(-4),
-		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		['<C-Space>'] = cmp.mapping.complete(),
-		['<C-e>'] = cmp.mapping.abort,
-		['<CR>'] = cmp.mapping.confirm({select = true})
-	}),
-	sources = cmp.config.sources({
-		{name = 'nvim_lsp'},
-		{name = 'snippy'}
-	}, {
-		{name = 'buffer'}
-	})
-})
-
-require("lsp_signature").setup({})
-
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-local lspconfig = require("lspconfig")
-
-lspconfig_conf = {capabilities = capabilities}
-
-lspconfig.ols.setup(lspconfig_conf)
-lspconfig.clangd.setup(lspconfig_conf)
-lspconfig.kotlin_language_server.setup(lspconfig_conf)
-lspconfig.java_language_server.setup(lspconfig_conf)
-lspconfig.rust_analyzer.setup(lspconfig_conf)
-lspconfig.zls.setup(lspconfig_conf)
-lspconfig.mesonlsp.setup(lspconfig_conf)
-
 vim.opt.fillchars = {eob = " "}
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -78,6 +39,7 @@ vim.api.nvim_set_option("clipboard","unnamed")
 require("local_lsp")
 require("local_filetree")
 require("local_lualine")
+require("local_panes")
 
 require("nvim-treesitter.configs").setup({
     ensure_installed = {"c", "cpp", "lua", "vim", "bash", "zig"},

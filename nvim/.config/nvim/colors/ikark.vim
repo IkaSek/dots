@@ -33,7 +33,7 @@ hi NonText guifg=#8f1460
 hi link SpecialChar NonText
 hi link Special NonText
 hi link @constructor Type
-hi @function.builtin guifg=#582c85
+hi @function.builtin guifg=#582c85 gui=bold
 hi link @constant.builtin Constant
 hi link @keyword.modifier Keyword
 
@@ -42,4 +42,12 @@ hi Filename guifg=#ac18cd guibg=#400661
 " TODO: time
 " hi Time
 hi File guifg=#ac18cd guibg=#400661
-hi Progress guifg=#a313f0 guibg=#3c114e 
+hi Progress guifg=#a313f0 guibg=#3c114e
+
+hi Title guifg=#330b8a guibg=#0d041a gui=bold
+
+hi Directory guifg=#540f80 gui=bold
+hi link NvimTreeFolderIcon Directory
+
+hi SpellCap guifg=#b50d9c gui=bold
+
