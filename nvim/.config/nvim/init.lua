@@ -68,12 +68,6 @@ lspconfig.rust_analyzer.setup(lspconfig_conf)
 lspconfig.zls.setup(lspconfig_conf)
 lspconfig.mesonlsp.setup(lspconfig_conf)
 
-require("lualine").setup {
-	options = {
-		icons_enabled = false,
-	}
-}
-
 vim.opt.fillchars = {eob = " "}
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -81,7 +75,9 @@ vim.opt.expandtab = true
 vim.bo.softtabstop = 2
 vim.api.nvim_set_option("clipboard","unnamed")
 
-require("lsp")
+require("local_lsp")
+require("local_filetree")
+require("local_lualine")
 
 require("nvim-treesitter.configs").setup({
     ensure_installed = {"c", "cpp", "lua", "vim", "bash", "zig"},
@@ -90,11 +86,13 @@ require("nvim-treesitter.configs").setup({
 
     highlight = {
       enable = true,
+      disable = {"zig"},  
     },
     ident = {
       enable = true
     }
 })
+
 
 vim.opt.termguicolors = true
 vim.cmd[[set number]]

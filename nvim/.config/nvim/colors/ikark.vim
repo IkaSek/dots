@@ -35,4 +35,11 @@ hi link Special NonText
 hi link @constructor Type
 hi @function.builtin guifg=#582c85
 hi link @constant.builtin Constant
+hi link @keyword.modifier Keyword
 
+hi Branch guifg=#a313f0 guibg=#3c114e
+hi Filename guifg=#ac18cd guibg=#400661
+" TODO: time
+" hi Time
+hi File guifg=#ac18cd guibg=#400661
+hi Progress guifg=#a313f0 guibg=#3c114e 
