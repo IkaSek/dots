@@ -1,11 +1,9 @@
+colorscheme ikark
 hi clear
-if exists("syntax_on")
-  syntax reset
-endif
+syntax reset
 
 """ IKARKv2
-let g:colors_name = "ikark"
-hi Normal guifg=#a6a6a6 guibg=#0d041a ctermfg=white ctermbg=black
+hi Normal guifg=#a6a6a6 guibg=#0d041a 
 "hi Delimiter guifg=#21589c
 hi link Delimiter Normal
 hi link Operator Normal
@@ -36,6 +34,8 @@ hi link @constructor Type
 hi @function.builtin guifg=#582c85 gui=bold
 hi link @constant.builtin Constant
 hi link @keyword.modifier Keyword
+hi link @delimiter Delimiter
+hi link @operator Operator
 
 hi Branch guifg=#a313f0 guibg=#3c114e
 hi Filename guifg=#ac18cd guibg=#400661
@@ -51,3 +51,6 @@ hi link NvimTreeFolderIcon Directory
 
 hi SpellCap guifg=#b50d9c gui=bold
 
+" https://neovim.io/doc/user/news-0.10.html
+hi link NormalFloat Pmenu
+hi StatusLine guifg=#a6a6a6 guibg=#000000

@@ -16,11 +16,14 @@ local lazy = require("lazy").setup({
 	"dcampos/cmp-snippy",
 	"ray-x/lsp_signature.nvim",
 	"esensar/neovim-kotlin",
-  { 
-    "nvim-treesitter/nvim-treesitter",
-    commit = "73fdd31",
-  },
+  "nvim-treesitter/nvim-treesitter",
   "nvim-tree/nvim-tree.lua",
+  "folke/trouble.nvim",
+  "andweeb/presence.nvim",
+  { 
+    "dgagn/diagflow.nvim",
+    event = 'LspAttach'
+  },
   {
     "Ohio2/nvim-libmodal-hotfix",
     lazy = true,
@@ -34,12 +37,13 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.bo.softtabstop = 2
-vim.api.nvim_set_option("clipboard","unnamed")
+vim.api.nvim_set_option("clipboard", "unnamed")
 
 require("local_lsp")
 require("local_filetree")
 require("local_lualine")
 require("local_panes")
+require("local_discord")
 
 require("nvim-treesitter.configs").setup({
     ensure_installed = {"c", "cpp", "lua", "vim", "bash", "zig"},
@@ -58,4 +62,3 @@ require("nvim-treesitter.configs").setup({
 
 vim.opt.termguicolors = true
 vim.cmd[[set number]]
-

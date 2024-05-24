@@ -11,7 +11,6 @@ local PanesMode = {
   rl = modal.mode.map.fn(function() vim.cmd('resize -1') end),
   rk = modal.mode.map.fn(function() vim.cmd('vertical resize +1') end),
   rj = modal.mode.map.fn(function() vim.cmd('vertical resize -1') end)
-
 }
 
-vim.keymap.set('n', '<space>pm', function() modal.mode.enter('PANES', PanesMode) end)
+vim.keymap.set('n', ';', function() modal.mode.enter('PANES', PanesMode) end)

@@ -3,6 +3,10 @@ local libmodal = require("libmodal")
 local cmp = require("cmp")
 local lsp_signature = require("lsp_signature")
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
+local diagflow = require("diagflow")
+local trouble = require("trouble")
+
+diagflow.setup({})
 
 cmp.setup({
 	snippet = {
@@ -38,6 +42,7 @@ lspconfig.rust_analyzer.setup(lspconfig_conf)
 lspconfig.zls.setup(lspconfig_conf)
 lspconfig.mesonlsp.setup(lspconfig_conf)
 
+trouble.setup()
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -51,14 +56,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
       sh = libmodal.mode.map.fn(vim.lsp.buf.signatuure_help, opts),
       dt = libmodal.mode.map.fn(vim.lsp.buf.type_definition, opts),
       r = libmodal.mode.map.fn(vim.lsp.buf.rename, opts),
-      ca = libmodal.mode.map.fn(vim.lsp.buf.code_action, opts),
+      a = libmodal.mode.map.fn(vim.lsp.buf.code_action, opts),
       dr = libmodal.mode.map.fn(vim.lsp.buf.references, opts),
-      ['<Down>'] = function() vim.cmd('normal! j') end,
-      ['<Left>'] = function() vim.cmd('normal! h') end,
-      ['<Right>'] = function() vim.cmd('normal! l') end,
-      ['<Up>'] = function() vim.cmd('normal! k') end,
+      da = libmodal.mode.map.fn(function() trouble.toggle() end),
+      fm = libmodal.mode.map.fn(vim.lsp.buf.format, opts),
     }
     vim.keymap.set('v', '<space>ca', vim.lsp.buf.code_action, opts)
   end,
 })
-vim.keymap.set('n', '<space>cm', function() libmodal.mode.enter('LSP', LSPMode) end, {nowait = false})
+vim.keymap.set('n', ',', function() libmodal.mode.enter('LSP', LSPMode) end)

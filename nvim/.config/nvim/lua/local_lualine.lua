@@ -1,13 +1,16 @@
 local lualine = require("lualine")
 
 
-local modes = {
+local Modes = {
   ['c'] = {'COMMAND-LINE', '#BA62AA'},
   ['ce'] = {'NORMAL EX', '#763290'},
   ['cv'] = {'EX', '#572D97'},
   ['i'] = {'INSERT', '#B02584'},
+  ['v'] = {'VISUAL', '#7a3787'},
+  ['n'] = {'NORMAL', '#662487'},
   -- other modes if i ever need them https://github.com/Iron-E/nvim-libmodal 
-  ['LSP'] = {'#5425E6'}
+  ['LSP'] = {'#5425E6'},
+  ['PANES'] = {'#580c85'}
 }
 
 vim.api.nvim_create_autocmd('ModeChanged', {callback = function()
@@ -22,20 +25,19 @@ lualine.setup({
   },
   sections = {
     lualine_a = {
-      'mode',
       function() 
         local mode_color, mode_name
         if vim.g.libmodalActiveModeName then
           mode_name = vim.g.libmodalActiveModeName
-          mode_color = modes[mode_name]
+          mode_color = Modes[mode_name]
         else
-          local current_mode = modes[vim.api.nvim_get_mode().mode]
+          local current_mode = Modes[vim.api.nvim_get_mode().mode]
           mode_name = current_mode[1]
           mode_color = current_mode[2]
         end
 
-        vim.api.nvim_set_hl(0, Mode, {fg = mode_color, bold = true})
-        return modename..' '
+        vim.api.nvim_set_hl(0, 'LualineViMode', {fg = mode_color, bold = true})
+        return mode_name..' '
       end,
       color = Mode,
     },
