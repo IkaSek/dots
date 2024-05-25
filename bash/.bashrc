@@ -1,6 +1,7 @@
 # startup commands
 ##############################################
 echo $(uname -s) on $(uname -r)| lolcat
+fastfetch
 ##############################################
 
 IKA_LOCAL="$HOME/.ilocal/"
@@ -12,14 +13,14 @@ if [ ${__IKA_NO_BLESH} -eq 0 ]; then
 fi
 #############################################
 
-export EDITOR="nano"
+export EDITOR="nvim"
 PS1='[\e[1m\e[38;5;56m\u\e[0m@\e[1m\e[38;5;92m\H\e[0m] [\e[1m\e[38;5;99m\W\e[0m] \\$ '
 
 alias dot="git --git-dir=/media/hdd1/src/dot --work-tree=$HOME"
 alias ls="exa --icons"
+alias tldr="bun tldr"
+alias e="$EDITOR"
 
 if [ ${__IKA_NO_BLESH} -eq 0 ]; then
     ble-attach
 fi
-
-fastfetch
