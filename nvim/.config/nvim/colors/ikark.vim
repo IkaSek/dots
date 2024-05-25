@@ -1,12 +1,13 @@
-colorscheme ikark
 hi clear
 syntax reset
+colorscheme default
 
 """ IKARKv2
 hi Normal guifg=#a6a6a6 guibg=#0d041a 
-"hi Delimiter guifg=#21589c
-hi link Delimiter Normal
-hi link Operator Normal
+" not linking those somehow fixes #1?
+hi Delimiter guifg=#a6a6a6 guibg=#0d041a
+hi Operator guifg=#a6a6a6 guibg=#0d041a
+"
 hi LineNr guifg=#6b6b6b guibg=#0d041a
 hi Cursor guifg=#2e2e2e
 hi CursorLine guibg=#311b4d
@@ -24,6 +25,10 @@ hi Function guifg=#6c18ba
 hi Constant guifg=#762691
 hi Type guifg=#671ba1
 hi Identifier guifg=#762691
+hi Variable guifg=#871591
+" this too?
+hi @variable guifg=#871591
+"
 hi PreProc guifg=#581463
 hi NonText guifg=#78104e
 hi Comment guifg=#6b6b6b

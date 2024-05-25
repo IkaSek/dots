@@ -1,7 +1,7 @@
 local lualine = require("lualine")
 
 
-local Modes = {
+local modes = {
   ['c'] = {'COMMAND-LINE', '#BA62AA'},
   ['ce'] = {'NORMAL EX', '#763290'},
   ['cv'] = {'EX', '#572D97'},
@@ -29,9 +29,9 @@ lualine.setup({
         local mode_color, mode_name
         if vim.g.libmodalActiveModeName then
           mode_name = vim.g.libmodalActiveModeName
-          mode_color = Modes[mode_name]
+          mode_color = modes[mode_name]
         else
-          local current_mode = Modes[vim.api.nvim_get_mode().mode]
+          local current_mode = modes[vim.api.nvim_get_mode().mode]
           mode_name = current_mode[1]
           mode_color = current_mode[2]
         end
