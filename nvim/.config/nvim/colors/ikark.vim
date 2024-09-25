@@ -29,18 +29,21 @@ hi Variable guifg=#871591
 " this too?
 hi @variable guifg=#871591
 "
+hi @text.todo guifg=#66293a guibg=#3b121d
+hi Todo guifg=#66293a guibg=#3b121d
 hi PreProc guifg=#581463
 hi NonText guifg=#78104e
 hi Comment guifg=#6b6b6b
 hi NonText guifg=#8f1460
 hi link SpecialChar NonText
-hi link Special NonText
+hi Special guifg=#8f1460 
 hi link @constructor Type
 hi @function.builtin guifg=#582c85 gui=bold
 hi link @constant.builtin Constant
 hi link @keyword.modifier Keyword
 hi link @delimiter Delimiter
 hi link @operator Operator
+hi link @lsp.type.errorTag.zig Identifier
 
 hi Branch guifg=#a313f0 guibg=#3c114e
 hi Filename guifg=#ac18cd guibg=#400661

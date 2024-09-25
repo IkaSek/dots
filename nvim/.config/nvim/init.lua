@@ -6,6 +6,7 @@ end
 vim.opt.rtp:prepend(lazyp)
 
 local lazy = require("lazy").setup({
+  "nvim-tree/nvim-web-devicons",
 	"neovim/nvim-lspconfig",
 	"bluz71/vim-moonfly-colors",
 	"nvim-lualine/lualine.nvim",
@@ -20,45 +21,46 @@ local lazy = require("lazy").setup({
   "nvim-tree/nvim-tree.lua",
   "folke/trouble.nvim",
   "andweeb/presence.nvim",
+  "tanvirtin/monokai.nvim",
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+  },
+  { 
+    "ibhagwan/fzf-lua",
+    config = function() 
+      require("fzf-lua")
+    end
+  },
+  --  "nvim-lua/plenary.nvim",
   { 
     "dgagn/diagflow.nvim",
     event = 'LspAttach'
   },
   {
-    "Ohio2/nvim-libmodal-hotfix",
-    lazy = true,
-    branch = "cmp_num_str_hotfix",
+    "Iron-E/nvim-libmodal",
+    lazy = true
   },
-  "nvim-telescope/telescope.nvim"
+  "APZelos/blamer.nvim",
 })
 
-vim.opt.fillchars = {eob = " "}
+vim.opt.fillchars = {eob = "~"}
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.bo.softtabstop = 2
-vim.api.nvim_set_option("clipboard", "unnamed")
+vim.api.nvim_set_option("clipboard", "unnamedplus")
+vim.opt.relativenumber = true
+
 
 require("local_lsp")
 require("local_filetree")
 require("local_lualine")
-require("local_panes")
 require("local_discord")
-
-require("nvim-treesitter.configs").setup({
-    ensure_installed = {"c", "cpp", "lua", "vim", "bash", "zig"},
-    auto_install = true,
-    sync_install = true,
-
-    highlight = {
-      enable = true,
-      disable = {"zig"},  
-    },
-    ident = {
-      enable = true
-    }
-})
-
 
 vim.opt.termguicolors = true
 vim.cmd[[set number]]
+vim.cmd[[colorscheme monokai]]
+vim.opt.guifont = "ZedMono Nerd Font Mono Bold 18"
+vim.opt.mouse = ""

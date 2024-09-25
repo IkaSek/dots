@@ -8,6 +8,21 @@ local trouble = require("trouble")
 
 diagflow.setup({})
 
+require("nvim-treesitter.configs").setup({
+    ensure_installed = {"c", "d", "cpp", "lua", "vim", "bash", "zig", "go", "python", "hare"},
+    auto_install = true,
+    sync_install = true,
+
+    highlight = {
+      enable = true,
+      disable = {"zig"},  
+    },
+    ident = {
+      enable = true
+    }
+})
+
+
 cmp.setup({
 	snippet = {
 		expand = function(args)
@@ -41,6 +56,10 @@ lspconfig.java_language_server.setup(lspconfig_conf)
 lspconfig.rust_analyzer.setup(lspconfig_conf)
 lspconfig.zls.setup(lspconfig_conf)
 lspconfig.mesonlsp.setup(lspconfig_conf)
+lspconfig.pylsp.setup(lspconfig_conf)
+lspconfig.gopls.setup(lspconfig_conf)
+lspconfig.serve_d.setup(lspconfig_conf)
+lspconfig.lua_ls.setup(lspconfig_conf)
 
 trouble.setup()
 
@@ -60,8 +79,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
       dr = libmodal.mode.map.fn(vim.lsp.buf.references, opts),
       da = libmodal.mode.map.fn(function() trouble.toggle() end),
       fm = libmodal.mode.map.fn(vim.lsp.buf.format, opts),
+      l = libmodal.mode.map.fn(vim.lsp.buf.hover, opts),
     }
     vim.keymap.set('v', '<space>ca', vim.lsp.buf.code_action, opts)
   end,
 })
 vim.keymap.set('n', ',', function() libmodal.mode.enter('LSP', LSPMode) end)
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.[ch]",
+  callback = function()
+    vim.lsp.buf.format()
+  end,
+})
