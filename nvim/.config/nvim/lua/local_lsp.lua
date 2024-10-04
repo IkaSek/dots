@@ -63,29 +63,6 @@ lspconfig.lua_ls.setup(lspconfig_conf)
 
 trouble.setup()
 
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-  callback = function(ev)
-    -- vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-    local opts = { buffer = ev.buf }
-    LSPMode = {
-      d = libmodal.mode.map.fn(vim.lsp.buf.declaration, opts),
-      dd = libmodal.mode.map.fn(vim.lsp.buf.definition, opts),
-      i = libmodal.mode.map.fn(vim.lsp.buf.implementation, opts),
-      sh = libmodal.mode.map.fn(vim.lsp.buf.signatuure_help, opts),
-      dt = libmodal.mode.map.fn(vim.lsp.buf.type_definition, opts),
-      r = libmodal.mode.map.fn(vim.lsp.buf.rename, opts),
-      a = libmodal.mode.map.fn(vim.lsp.buf.code_action, opts),
-      dr = libmodal.mode.map.fn(vim.lsp.buf.references, opts),
-      da = libmodal.mode.map.fn(function() trouble.toggle() end),
-      fm = libmodal.mode.map.fn(vim.lsp.buf.format, opts),
-      l = libmodal.mode.map.fn(vim.lsp.buf.hover, opts),
-    }
-    vim.keymap.set('v', '<space>ca', vim.lsp.buf.code_action, opts)
-  end,
-})
-vim.keymap.set('n', ',', function() libmodal.mode.enter('LSP', LSPMode) end)
-
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.[ch]",
   callback = function()
