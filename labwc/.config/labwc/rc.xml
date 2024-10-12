@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<labwc_config>
+  <desktops>
+    <number>4</number>
+  </desktops>
+  
+  <windowSwitcher show="yes" preview="yes" outlines="yes" allWorkspaces="no"/>
+
+  <core>
+    <decoration>server</decoration>
+    <gap>8</gap>
+  </core>
+  
+    <theme>
+    <name></name>
+    <cornerRadius>8</cornerRadius>
+    <font name="FiraCode Nerd Font" size="16" />
+  </theme>
+
+  <keyboard>
+    <default />
+    <keybind key="W-Return">
+      <action name="Execute" command="kitty" />
+    </keybind>
+    <keybind key="W-B">
+      <action name="Execute" command="netsurf-gtk3" />
+    </keybind>
+    <keybind key="W-Q">
+      <action name="Close" />
+    </keybind>
+    <keybind key="W-1">
+      <action name="GoToDesktop" to="1" />
+    </keybind>
+    <keybind key="W-2">
+      <action name="GoToDesktop" to="2" />
+    </keybind>
+    <keybind key="W-3">
+      <action name="GoToDesktop" to="3" />
+    </keybind>
+    <keybind key="W-4">
+      <action name="GoToDesktop" to="4" />
+    </keybind>
+    
+    <keybind key="W-S-1">
+      <action name="SendToDesktop" to="1" />
+    </keybind>
+    <keybind key="W-S-2">
+      <action name="SendToDesktop" to="2" />
+    </keybind>
+    <keybind key="W-S-3">
+      <action name="SendToDesktop" to="3" />
+    </keybind>
+    <keybind key="W-S-4">
+      <action name="SendToDesktop" to="4" />
+    </keybind>
+  </keyboard>
+
+  <mouse>
+    <default />
+    <!-- Show a custom menu on desktop right click -->
+    <context name="Root">
+      <mousebind button="Right" action="Press">
+        <action name="None" menu="some-custom-menu" />
+      </mousebind>
+    </context>
+  </mouse>
+
+</labwc_config>
