@@ -1,4 +1,4 @@
-vim.g.mapleader = "."
+vim.g.mapleader = "z"
 
 local lazyp = vim.fn.stdpath("data") .. "~/.local/share/nvim/lazy.nvim"
 if not vim.loop.fs_stat(lazyp) then
@@ -18,7 +18,9 @@ local lazy = require("lazy").setup({
 	"neovim/nvim-lspconfig",
 	"bluz71/vim-moonfly-colors",
 	"nvim-lualine/lualine.nvim",
-	"hrsh7th/nvim-cmp",
+  { 
+    "hrsh7th/nvim-cmp",
+  },
 	"Tetralux/odin.vim",
 	"hrsh7th/cmp-nvim-lsp",
 	"dcampos/nvim-snippy",
@@ -27,7 +29,14 @@ local lazy = require("lazy").setup({
 	"esensar/neovim-kotlin",
 	"nvim-treesitter/nvim-treesitter",
 	"nvim-tree/nvim-tree.lua",
-	"https://github.com/justinmk/vim-syntax-extra",
+	"ludovicchabant/vim-gutentags",
+  "https://github.com/justinmk/vim-syntax-extra",
+	{
+		"nvim-neotest/nvim-nio",
+		--opts = {
+		--	library = { plugins = { "nvim-dap-ui" }, types = true },
+		--},
+	},
 	--{
 	--  "folke/noice.nvim",
 	--  event = "VeryLazy",
@@ -39,7 +48,8 @@ local lazy = require("lazy").setup({
 	--},
 	{
 		"folke/trouble.nvim",
-		opts = {},
+		opts = {
+    },
 
 		keys = {
 			{
@@ -56,42 +66,42 @@ local lazy = require("lazy").setup({
 		"mfussenegger/nvim-dap",
 		keys = {
 			{
-				"<leader>Ga",
+				"<leader>ga",
 				"<cmd>DapNew<cr>",
 			},
 			{
-				"<leader>Gd",
+				"<leader>gd",
 				"<cmd>DapDisconnect<cr>",
 			},
 			{
-				"<leader>Gb",
+				"<leader>gb",
 				"<cmd>DapToggleBreakpoint<cr>",
 			},
 			{
-				"<leader>Gc",
+				"<leader>gc",
 				"<cmd>DapContinue<cr>",
 			},
 			{
-				"<leader>Gs",
+				"<leader>gs",
 				"<cmd>DapStepOver<cr>",
 			},
 			{
-				"<leader>GS",
+				"<leader>gS",
 				"<cmd>DapStepInto<cr>",
 			},
 			{
-				"<leader>Go",
+				"<leader>go",
 				"<cmd>DapStepOut<cr>",
 			},
 			{
-				"<leader>Gk",
+				"<leader>gk",
 				"<cmd>DapTerminate<cr>",
 			},
 		},
 	},
 	{
 		"rcarriga/nvim-dap-ui",
-		dependencies = { "mfussenegger/nvim-dap" },
+		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
 	},
 	"andweeb/presence.nvim",
 	"tanvirtin/monokai.nvim",
@@ -136,6 +146,7 @@ vim.opt.expandtab = true
 vim.bo.softtabstop = 2
 vim.api.nvim_set_option("clipboard", "unnamedplus")
 vim.opt.relativenumber = true
+vim.o.tags = "./tags;,tags"
 
 vim.keymap.set("n", "<leader>Dd", function()
 	vim.lsp.buf.declaration()
@@ -196,4 +207,14 @@ vim.opt.termguicolors = true
 vim.cmd([[set number]])
 vim.cmd([[colorscheme monokai]])
 vim.opt.guifont = "ZedMono Nerd Font Mono Bold 18"
-vim.opt.mouse = ""
+--vim.opt.mouse = ""
+vim.opt.colorcolumn = "80"
+
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  float = true,
+})
+
+require("include_guard")
