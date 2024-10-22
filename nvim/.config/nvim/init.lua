@@ -14,13 +14,18 @@ end
 vim.opt.rtp:prepend(lazyp)
 
 local lazy = require("lazy").setup({
+	{
+		"mrjones2014/legendary.nvim",
+		lazy = false,
+		config = function() end,
+	},
 	"nvim-tree/nvim-web-devicons",
 	"neovim/nvim-lspconfig",
 	"bluz71/vim-moonfly-colors",
 	"nvim-lualine/lualine.nvim",
-  { 
-    "hrsh7th/nvim-cmp",
-  },
+	{
+		"hrsh7th/nvim-cmp",
+	},
 	"Tetralux/odin.vim",
 	"hrsh7th/cmp-nvim-lsp",
 	"dcampos/nvim-snippy",
@@ -30,7 +35,7 @@ local lazy = require("lazy").setup({
 	"nvim-treesitter/nvim-treesitter",
 	"nvim-tree/nvim-tree.lua",
 	"ludovicchabant/vim-gutentags",
-  "https://github.com/justinmk/vim-syntax-extra",
+	"https://github.com/justinmk/vim-syntax-extra",
 	{
 		"nvim-neotest/nvim-nio",
 		--opts = {
@@ -48,8 +53,7 @@ local lazy = require("lazy").setup({
 	--},
 	{
 		"folke/trouble.nvim",
-		opts = {
-    },
+		opts = {},
 
 		keys = {
 			{
@@ -103,7 +107,7 @@ local lazy = require("lazy").setup({
 		"rcarriga/nvim-dap-ui",
 		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
 	},
-	"andweeb/presence.nvim",
+	-- "andweeb/presence.nvim",
 	"tanvirtin/monokai.nvim",
 	{
 		"pmizio/typescript-tools.nvim",
@@ -112,6 +116,20 @@ local lazy = require("lazy").setup({
 	},
 	{
 		"ibhagwan/fzf-lua",
+		keys = {
+			{
+				"<leader>fg",
+				"<cmd>FzfLua grep_project<cr>",
+			},
+			{
+				"<leader>ff",
+				"<cmd>FzfLua files<cr>",
+			},
+			{
+				"<leader>fs",
+				"<cmd>FzfLua tags<cr>",
+			},
+		},
 		config = function()
 			require("fzf-lua")
 		end,
@@ -137,6 +155,54 @@ local lazy = require("lazy").setup({
 			}
 		end,
 	},
+	{
+		"olimorris/codecompanion.nvim",
+		dependencies = {
+
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"hrsh7th/nvim-cmp", -- Optional: For using slash commands and variables in the chat buffer
+			"nvim-telescope/telescope.nvim", -- Optional: For using slash commands
+			{ "stevearc/dressing.nvim", opts = {} }, -- Optional: Improves `vim.ui.select`
+		},
+		config = true,
+	},
+	{
+		"numToStr/Comment.nvim",
+		opts = {
+			padding = true,
+			sticky = true,
+			ignore = nil,
+
+			toggler = {
+				line = "gcc",
+				block = "gbc",
+			},
+			opleader = {
+				line = "gc",
+				block = "gb",
+			},
+			extra = {
+				aboe = "gcO",
+				below = "gco",
+				eol = "gca",
+			},
+			mappings = {
+				basic = true,
+				extra = true,
+			},
+			pre_hook = nil,
+			post_hook = nil,
+		},
+	},
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = true,
+		opts = {},
+	},
+	"nvim-pack/nvim-spectre",
+	"tpope/vim-fugitive",
 })
 
 vim.opt.fillchars = { eob = "~" }
@@ -148,27 +214,6 @@ vim.api.nvim_set_option("clipboard", "unnamedplus")
 vim.opt.relativenumber = true
 vim.o.tags = "./tags;,tags"
 
-vim.keymap.set("n", "<leader>Dd", function()
-	vim.lsp.buf.declaration()
-end)
-vim.keymap.set("n", "<leader>DD", function()
-	vim.lsp.buf.definition()
-end)
-vim.keymap.set("n", "<leader>Di", function()
-	vim.lsp.buf.implementation()
-end)
-vim.keymap.set("n", "<leader>Dsh", function()
-	vim.lsp.buf.signature_help()
-end)
-vim.keymap.set("n", "<leader>Ddt", function()
-	vim.lsp.buf.type_definition()
-end)
-vim.keymap.set("n", "<leader>Dr", function()
-	vim.lsp.buf.rename()
-end)
-vim.keymap.set("n", "<leader>Ddr", function()
-	vim.lsp.buf.references()
-end)
 vim.keymap.set("n", "<leader>Dl", function()
 	vim.lsp.buf.hover()
 end)
@@ -176,7 +221,7 @@ end)
 require("local_lsp")
 require("local_filetree")
 require("local_lualine")
-require("local_discord")
+--require("local_discord")
 
 require("dap").adapters.gdb = {
 	type = "executable",
@@ -211,10 +256,10 @@ vim.opt.guifont = "ZedMono Nerd Font Mono Bold 18"
 vim.opt.colorcolumn = "80"
 
 vim.diagnostic.config({
-  virtual_text = true,
-  signs = true,
-  underline = true,
-  float = true,
+	virtual_text = true,
+	signs = true,
+	underline = true,
+	float = true,
 })
 
 require("include_guard")

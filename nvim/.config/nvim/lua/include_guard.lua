@@ -2,7 +2,7 @@ include_guard = {
 	fname_to_guard = function(name)
 		local fname = vim.fn.fnamemodify(name, ":t")
     local pos1, pos2 = fname:find("%.")
-		local result = fname:sub(1, pos1 - 1):gsub("[^%w]", "_"):upper() .. "_"
+		local result = fname:sub(1, pos1):gsub("[^%w]", "_"):upper() .. "H_"
 		return result
 	end,
 
