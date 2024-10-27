@@ -194,6 +194,10 @@ local lazy = require("lazy").setup({
 			pre_hook = nil,
 			post_hook = nil,
 		},
+		config = function()
+			local ft = require("Comment.ft")
+			ft({ "c", "cpp" }, "/* %s */")
+		end,
 	},
 	{
 		"windwp/nvim-autopairs",
@@ -203,6 +207,13 @@ local lazy = require("lazy").setup({
 	},
 	"nvim-pack/nvim-spectre",
 	"tpope/vim-fugitive",
+  "mhartington/formatter.nvim",
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require("ibl").setup()
+    end,
+  },
 })
 
 vim.opt.fillchars = { eob = "~" }
@@ -214,6 +225,8 @@ vim.api.nvim_set_option("clipboard", "unnamedplus")
 vim.opt.relativenumber = true
 vim.o.tags = "./tags;,tags"
 
+vim.g.gutentags_ctags_extra_args = { '--fields=+niazS', '--extras=+q' }
+
 vim.keymap.set("n", "<leader>Dl", function()
 	vim.lsp.buf.hover()
 end)
@@ -222,6 +235,11 @@ require("local_lsp")
 require("local_filetree")
 require("local_lualine")
 --require("local_discord")
+
+local Rule = require('nvim-autopairs.rule')
+local npairs = require('nvim-autopairs')
+npairs.add_rule(Rule("<", ">", "html"))
+
 
 require("dap").adapters.gdb = {
 	type = "executable",
@@ -261,5 +279,12 @@ vim.diagnostic.config({
 	underline = true,
 	float = true,
 })
+
+vim.api.nvim_set_keymap(
+  'n',
+  '<leader>ld',
+  '<cmd>lua vim.lsp.buf.hover()',
+  { noremap = true, silent = true }
+)
 
 require("include_guard")

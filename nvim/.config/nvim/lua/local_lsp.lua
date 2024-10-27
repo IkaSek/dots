@@ -27,9 +27,9 @@ cmp.setup({
 		end,
 	},
 	mapping = cmp.mapping.preset.insert({
-    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-d>"] = cmp.mapping.scroll_docs(-4),
+		["<C-u>"] = cmp.mapping.scroll_docs(4),
+		["<S-CR>"] = cmp.mapping.complete(),
 		["<C-q>"] = cmp.mapping.abort,
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
 	}),
@@ -38,9 +38,16 @@ cmp.setup({
 		{ name = "snippy" },
 	}, {
 		{ name = "buffer" },
-	  { name = "cmp_ai" },
-
-  }),
+		{ name = "cmp_ai" },
+	}),
+	window = {
+		completion = cmp.config.window.bordered({
+			border = "rounded",
+		}),
+		documentation = cmp.config.window.bordered({
+			border = "rounded",
+		}),
+	},
 })
 
 lsp_signature.setup({})
@@ -71,36 +78,36 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 require("codecompanion").setup({
-  strategies = {
-    chat = {
-      adapter = "ollama",
-    },
-    inline = {
-      adapter = "ollama",
-    },
-    agent = {
-      adapter = "ollama",
-    },
-  },
-  adapters = {
-    ollama = function()
-      return require("codecompanion.adapters").extend("ollama", {
-        name = "lamma3",
-        schema = {
-          model = {
-            default = "llama3:latest",
-          },
-          num_ctx = {
-            default = 16384,
-          },
-          num_predict = {
-            default = -1,
-          },
-        },
-        parameters = {
-          sync = true,
-        },
-      })
-    end,
-  },
+	strategies = {
+		chat = {
+			adapter = "ollama",
+		},
+		inline = {
+			adapter = "ollama",
+		},
+		agent = {
+			adapter = "ollama",
+		},
+	},
+	adapters = {
+		ollama = function()
+			return require("codecompanion.adapters").extend("ollama", {
+				name = "lamma3",
+				schema = {
+					model = {
+						default = "llama3:latest",
+					},
+					num_ctx = {
+						default = 16384,
+					},
+					num_predict = {
+						default = -1,
+					},
+				},
+				parameters = {
+					sync = true,
+				},
+			})
+		end,
+	},
 })
