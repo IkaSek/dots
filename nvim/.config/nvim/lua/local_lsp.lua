@@ -70,13 +70,6 @@ lspconfig.serve_d.setup(lspconfig_conf)
 
 trouble.setup()
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*.{c,h,cpp,hpp}",
-	callback = function()
-		vim.lsp.buf.format()
-	end,
-})
-
 require("codecompanion").setup({
 	strategies = {
 		chat = {
